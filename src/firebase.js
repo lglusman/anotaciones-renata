@@ -17,7 +17,8 @@ import {
   signInWithPopup,
   signOut,
   onAuthStateChanged,
-} from 'Firebase/auth'
+} from 'firebase/auth'
+
 import { goto } from '$app/navigation'
 const firebaseConfig = {
   apiKey: 'AIzaSyBnN3JG23cbzSnK7OTvH2NxALEoK4YxsNA',
