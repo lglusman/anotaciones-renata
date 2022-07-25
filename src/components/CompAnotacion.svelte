@@ -1,5 +1,7 @@
 <script>
   import { tick } from 'svelte'
+  import AutoComplete from "simple-svelte-autocomplete"
+  import { anotaciones } from '../stores/anotaciones'
 
   import { saveAnotacion } from '../firebase'
   export let id = 0
@@ -11,6 +13,14 @@
     fecharealizado: '',
     categoria: '',
   }
+
+  $: categorias =
+    ($anotaciones &&
+      $anotaciones
+        .map((x) => x.data.categoria.toUpperCase())
+        .filter((v, i, a) => a.indexOf(v.trim()) === i)
+        .sort()) ||
+    []
 
   const actualizarAnotacion = () => {
     if (id) {
@@ -73,8 +83,8 @@
           >Categoria</label
           >
           {/if}
-        <div class="control">
-          <input
+        <div class="control1">
+          <!-- <input
             on:change={actualizarAnotacion}
             bind:value={anotacion.categoria}
             class="form-control"
@@ -82,8 +92,11 @@
             placeholder="Categoria"
             name="categoria"
             required
-          />
+          /> -->
+          <AutoComplete required onChange={actualizarAnotacion} inputClassName ="rounded" noResultsText="" items={categorias} bind:selectedItem={anotacion.categoria} />
         </div>
+
+        
       </div>
     {/if}
     <div class="col-6 col-md-1">
@@ -141,5 +154,8 @@
      
   .bg-pendiente {
     background-color: #BB0A21
+  }
+  .control1 {
+    margin-bottom: 2px;
   }
 </style>

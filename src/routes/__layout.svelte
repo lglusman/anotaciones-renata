@@ -3,7 +3,7 @@
   import { user } from '../stores/users'
   import { anotaciones } from '../stores/anotaciones'
   import { logout } from '../firebase'
-
+  import icon from '../assets/favicon.png'
   $: categorias =
     ($anotaciones &&
       $anotaciones
@@ -13,9 +13,17 @@
     []
 </script>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg bg-white text-black">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">anotaciones-renatita </a>
+    <a class="navbar-brand" href="/">
+      <img
+        src={icon}
+        alt="logo"
+        class="rounded-circle"
+        width="32"
+        height="32"
+      />
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -32,9 +40,7 @@
         {#if $user}
           <li class="nav-item">
             <a
-              class="nav-link"
-              class:active={$page.url.pathname.includes('anotaciones')}
-              aria-current="page"
+              class="nav-link btn btn-outline-dark link-info"
               href="/anotaciones">Nueva Anotacion</a
             >
           </li>
@@ -46,39 +52,27 @@
       </ul>
 
       {#if $user}
-        <ul class="navbar-nav ml-auto navbar-right-top">
+        <ul class="navbar-nav ml-auto navbar-right-top gap-2">
           <li>
+            <span class="nav-link">
             {$user.displayName}
+          </span>
           </li>
           <li>
-            <div class="flex-shrink-0 dropdown mx-3">
-              <a
-                href="."
-                class="d-block link-dark text-decoration-none dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="true"
-              >
-                <img
-                  src={$user.photoURL}
-                  alt="mdo"
-                  class="rounded-circle"
-                  width="32"
-                  height="32"
-                />
-              </a>
-              <ul
-                class="dropdown-menu text-small shadow"
-                style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);"
-                data-popper-placement="bottom-end"
-              >
-                <li>
-                  <a class="dropdown-item" href="/" on:click={() => logout()}
-                    >Logout</a
-                  >
-                </li>
-              </ul>
-            </div>
+            <a class="nav-link" href="/" on:click={() => logout()}
+              >Logout</a
+            >
           </li>
+          <li>
+            <img
+              src={$user.photoURL}
+              alt="mdo"
+              class="rounded-circle"
+              width="32"
+              height="32"
+            />
+          </li>
+
         </ul>
       {/if}
     </div>
@@ -90,7 +84,7 @@
       {#each categorias as categoria}
         <li class="nav-item">
           <a
-            class="nav-link"
+            class="nav-link link-info"
             class:active={$page.params.categoria === categoria}
             aria-current="page"
             href="/anotaciones/{categoria}">{categoria}</a

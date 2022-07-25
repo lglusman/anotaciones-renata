@@ -5,6 +5,7 @@
   import ListaAnotaciones from '../../components/ListaAnotaciones.svelte'
   import { page } from '$app/stores'
 
+  let showcategorias = false
   onMount(() => {
     if (!$user) {
       goto('/', { replace: true })
@@ -22,5 +23,24 @@
     )
 </script>
 
-<h2>{categoria}</h2>
-<ListaAnotaciones anotaciones={lista} showcategorias={false} />
+<div class="my-3">
+  <div class="col-12 d-flex gap-2 justify-content-center">
+  <span>
+    <h2>{categoria}</h2> 
+  </span>
+  <span>
+    <button class="btn btn-sm btn-info" on:click={() => showcategorias = !showcategorias}>
+      editar categorias
+    </button>
+  </span>
+</div>
+</div>
+<ListaAnotaciones anotaciones={lista} {showcategorias} />
+
+
+<style>
+  span {
+    display: inline-block;
+    justify-content: space-between;
+  }
+</style>

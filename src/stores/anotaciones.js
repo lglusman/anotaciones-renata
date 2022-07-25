@@ -10,7 +10,6 @@ const createAnotaciones = () => {
       update((anotaciones) => [...anotaciones, anotacion])
     },
     modificaranotacion: (anotacion) => {
-      console.log(anotacion)
       update(anotaciones => anotaciones.map(element => element.id == anotacion.id ? {...anotacion} : element))
     },
     setear: (anotaciones) => {
