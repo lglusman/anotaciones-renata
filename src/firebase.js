@@ -1,6 +1,6 @@
 import { user } from './stores/users'
 import { anotaciones } from './stores/anotaciones'
-import { initializeApp } from 'Firebase/app'
+import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { collection, addDoc, getDocs, query, where, doc, updateDoc  } from 'firebase/firestore'
 
